@@ -11,8 +11,34 @@ int main()
 
     for (size_t i = 0; i < 5; i++)
     {
-        *(replacement_word + i) = "A";
+        *(replacement_word + i) = 'A' + i;
     }
 
-    printf("%d", strlen(replacement_word));
+    int len = strlen(replacement_word);
+    printf("%d\n", len);
+    printf("%s\n", replacement_word);
+
+    replacement_word = realloc(replacement_word, 6);
+
+    char *endpointer = replacement_word+5;
+    *endpointer = 'x';
+    printf("Last char: %c\n", *(endpointer));
+    char *pointer = replacement_word + 4;
+
+    char aux;
+    for (size_t i = 0; i < 5; i++)
+    {
+        aux = *(pointer);
+        *(pointer) = *(endpointer);
+        *(endpointer) = aux;
+
+        endpointer--;
+        pointer--;
+    }
+    
+    len = strlen(replacement_word);
+    printf("aaaaaaaaa %d\n", len);
+    printf("%s", replacement_word);
+    free(replacement_word);
+    free(word_to_replace);
 }
